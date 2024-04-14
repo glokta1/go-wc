@@ -16,6 +16,16 @@ func readFile(filename string) (string, error) {
 	return string(fileData), nil
 }
 
+func countWords(filename string) int {
+	contents, err := readFile(filename)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	words := strings.Fields(contents)
+	return len(words)
+}
+
 func countLines(filename string) int {
 	contents, err := readFile(filename)
 	if err != nil {
@@ -30,4 +40,5 @@ func main() {
 	filename := os.Args[1]
 	// fmt.Println(contents)
 	fmt.Printf("%8d %s\n", countLines(filename), filename)
+	fmt.Printf("%8d %s\n", countWords(filename), filename)
 }
