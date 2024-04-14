@@ -36,9 +36,19 @@ func countLines(filename string) int {
 	return len(lines) - 1
 }
 
+func countCharacters(filename string) int {
+	contents, err := readFile(filename)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	return len(contents)
+}
+
 func main() {
 	filename := os.Args[1]
 	// fmt.Println(contents)
 	fmt.Printf("%8d %s\n", countLines(filename), filename)
 	fmt.Printf("%8d %s\n", countWords(filename), filename)
+	fmt.Printf("%8d %s\n", countCharacters(filename), filename)
 }

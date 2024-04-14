@@ -36,3 +36,21 @@ func TestCountWords(t *testing.T) {
 		}
 	}
 }
+
+func TestCountCharacters(t *testing.T) {
+	testCases := []struct {
+		filename string
+		expected int
+	}{
+		{"testdata/empty.txt", 0},
+		{"testdata/one_line.txt", 31},
+		{"testdata/multiple_lines.txt", 41},
+	}
+
+	for _, tc := range testCases {
+		got := countCharacters(tc.filename)
+		if got != tc.expected {
+			t.Errorf("countCharacters(%q) = %d, want %d", tc.filename, got, tc.expected)
+		}
+	}
+}
