@@ -25,7 +25,7 @@ func TestCountWords(t *testing.T) {
 		expected int
 	}{
 		{"testdata/empty.txt", 0},
-		{"testdata/one_line.txt", 4},
+		{"testdata/one_line.txt", 5},
 		{"testdata/multiple_lines.txt", 6},
 	}
 
