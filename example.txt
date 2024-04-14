@@ -1,0 +1,6 @@
+Write a command line program that implements Unix wc like functionality. Read the man page for wc if you don't know what it does. Implement all options such as -l (show only line count), -w (show only word count), -c (show only character count). Also, allow to combine these options as the user wants. Display all three values (line, word, and char count) if no option is specified. The input to wc can be single or multiple files or even STDIN.
+The program should have the following features.
+
+Given a single text file as input, implement wc -w that counts the number of words in the file. Words are whitespace separated.
+If you're in doubt what a "word" is in this context, refer to the actual wc -w output. Your program's output should match with actual wc -w's output.
+The program will be executed as follows:
