@@ -45,7 +45,7 @@ func main() {
 	for _, filename := range files {
 		fileContents, err := readFile(filename)
 		if err != nil {
-			log.Fatalln(err)
+			log.Println(err)
 		}
 
 		if !*linesFlag && !*wordsFlag && !*charactersFlag {
@@ -72,6 +72,10 @@ func main() {
 		}
 
 		fmt.Printf(" %s\n", filename)
+	}
+
+	if (len(files) < 2) {
+		return
 	}
 
 	if *linesFlag {
