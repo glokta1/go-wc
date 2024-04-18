@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -46,9 +47,31 @@ func countCharacters(filename string) int {
 }
 
 func main() {
-	filename := os.Args[1]
 	// fmt.Println(contents)
-	fmt.Printf("%8d %s\n", countLines(filename), filename)
-	fmt.Printf("%8d %s\n", countWords(filename), filename)
-	fmt.Printf("%8d %s\n", countCharacters(filename), filename)
+	linesFlag := flag.Bool("l", false, "Count lines")
+	wordsFlag := flag.Bool("w", false, "Count words")
+	charactersFlag := flag.Bool("c", false, "Count characters")
+
+	flag.Parse()
+
+	filename := flag.Arg(0)
+
+	if *linesFlag {
+		fmt.Printf("%8d", countLines(filename))
+	}
+
+	if *wordsFlag {
+		fmt.Printf("%8d", countWords(filename))
+	}
+
+	if *charactersFlag {
+		fmt.Printf("%8d", countCharacters(filename))
+	}
+
+	fmt.Printf(" %s\n", filename)
+
+	// fmt.Printf("%8d%8d%8d %s\n", countLines(filename), countWords(filename), countCharacters(filename), filename)
+	// fmt.Printf("%8d %s\n", countLines(filename), filename)
+	// fmt.Printf("%8d %s\n", countWords(filename), filename)
+	// fmt.Printf("%8d %s\n", countCharacters(filename), filename)
 }
