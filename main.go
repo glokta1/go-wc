@@ -56,6 +56,11 @@ func main() {
 
 	filename := flag.Arg(0)
 
+	if !*linesFlag && !*wordsFlag && !*charactersFlag {
+		fmt.Printf("%8d%8d%8d %s\n", countLines(filename), countWords(filename), countCharacters(filename), filename)
+		return;
+	}
+
 	if *linesFlag {
 		fmt.Printf("%8d", countLines(filename))
 	}
