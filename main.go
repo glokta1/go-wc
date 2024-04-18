@@ -17,33 +17,18 @@ func readFile(filename string) (string, error) {
 	return string(fileData), nil
 }
 
-func countWords(filename string) int {
-	contents, err := readFile(filename)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	words := strings.Fields(contents)
+func countWords(fileContents string) int {
+	words := strings.Fields(fileContents)
 	return len(words)
 }
 
-func countLines(filename string) int {
-	contents, err := readFile(filename)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	lines := strings.Split(contents, "\n")
+func countLines(fileContents string) int {
+	lines := strings.Split(fileContents, "\n")
 	return len(lines) - 1
 }
 
-func countCharacters(filename string) int {
-	contents, err := readFile(filename)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	return len(contents)
+func countCharacters(fileContents string) int {
+	return len(fileContents)
 }
 
 func main() {
@@ -56,25 +41,50 @@ func main() {
 
 	files := flag.Args()
 
+	var totalLines, totalWords, totalCharacters int
 	for _, filename := range files {
+		fileContents, err := readFile(filename)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
 		if !*linesFlag && !*wordsFlag && !*charactersFlag {
-			fmt.Printf("%8d%8d%8d %s\n", countLines(filename), countWords(filename), countCharacters(filename), filename)
+			fmt.Printf("%8d%8d%8d %s\n", countLines(fileContents), countWords(fileContents), countCharacters(fileContents), filename)
 			continue
 		}
 
 		if *linesFlag {
-			fmt.Printf("%8d", countLines(filename))
+			lines := countLines(fileContents)
+			totalLines += lines
+			fmt.Printf("%8d", lines)
 		}
 
 		if *wordsFlag {
-			fmt.Printf("%8d", countWords(filename))
+			words := countWords(fileContents)
+			totalWords += words
+			fmt.Printf("%8d", words)
 		}
 
 		if *charactersFlag {
-			fmt.Printf("%8d", countCharacters(filename))
+			characters := countCharacters(fileContents)
+			totalCharacters += characters
+			fmt.Printf("%8d", characters)
 		}
 
 		fmt.Printf(" %s\n", filename)
-
 	}
+
+	if *linesFlag {
+		fmt.Printf("%8d", totalLines)
+	}
+
+	if *wordsFlag {
+		fmt.Printf("%8d", totalWords)
+	}
+
+	if *charactersFlag {
+		fmt.Printf("%8d", totalCharacters)
+	}
+
+	fmt.Printf(" total\n")
 }
