@@ -54,29 +54,27 @@ func main() {
 
 	flag.Parse()
 
-	filename := flag.Arg(0)
+	files := flag.Args()
 
-	if !*linesFlag && !*wordsFlag && !*charactersFlag {
-		fmt.Printf("%8d%8d%8d %s\n", countLines(filename), countWords(filename), countCharacters(filename), filename)
-		return;
+	for _, filename := range files {
+		if !*linesFlag && !*wordsFlag && !*charactersFlag {
+			fmt.Printf("%8d%8d%8d %s\n", countLines(filename), countWords(filename), countCharacters(filename), filename)
+			continue
+		}
+
+		if *linesFlag {
+			fmt.Printf("%8d", countLines(filename))
+		}
+
+		if *wordsFlag {
+			fmt.Printf("%8d", countWords(filename))
+		}
+
+		if *charactersFlag {
+			fmt.Printf("%8d", countCharacters(filename))
+		}
+
+		fmt.Printf(" %s\n", filename)
+
 	}
-
-	if *linesFlag {
-		fmt.Printf("%8d", countLines(filename))
-	}
-
-	if *wordsFlag {
-		fmt.Printf("%8d", countWords(filename))
-	}
-
-	if *charactersFlag {
-		fmt.Printf("%8d", countCharacters(filename))
-	}
-
-	fmt.Printf(" %s\n", filename)
-
-	// fmt.Printf("%8d%8d%8d %s\n", countLines(filename), countWords(filename), countCharacters(filename), filename)
-	// fmt.Printf("%8d %s\n", countLines(filename), filename)
-	// fmt.Printf("%8d %s\n", countWords(filename), filename)
-	// fmt.Printf("%8d %s\n", countCharacters(filename), filename)
 }
